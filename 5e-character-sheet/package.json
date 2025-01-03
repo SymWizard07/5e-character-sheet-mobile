@@ -26,7 +26,8 @@
     "react-native-tab-view": "^4.0.5",
     "react-native-vector-icons": "^10.2.0",
     "react-navigation": "^5.0.0",
-    "undefined": "react-navigation/bottom-tabs"
+    "undefined": "react-navigation/bottom-tabs",
+    "expo-file-system": "~18.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
