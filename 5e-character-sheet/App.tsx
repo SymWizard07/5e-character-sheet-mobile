@@ -5,6 +5,7 @@ import { lightTheme, darkTheme } from './theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import StatusPage from './pages/status';
 import { Data, saveCharacterData, loadCharacterData, loadAppData, saveAppData } from './data';
+import EmptyPage from './pages/empty';
 
 const App: React.FC = () => {
 
@@ -47,13 +48,13 @@ const App: React.FC = () => {
     }
 
     // Combine tabs and icons
-    const tabs: { name: string; icon: React.ComponentProps<typeof MaterialCommunityIcons>['name']; page?: React.FC }[] = [
-        { name: "Inventory", icon: "treasure-chest", page: undefined },
-        { name: "Feats", icon: "star-outline", page: undefined },
-        { name: "Status", icon: "account", page: StatusPage },
-        { name: "Ability Scores", icon: "chart-box-outline", page: undefined },
-        { name: "Weapons", icon: "sword-cross", page: undefined },
-        { name: "Spells", icon: "book-open-variant", page: undefined },
+    const tabs: { name: string; icon: React.ComponentProps<typeof MaterialCommunityIcons>['name']; page: React.FC }[] = [
+        { name: "Inventory", icon: "treasure-chest", page: EmptyPage },
+        { name: "Feats", icon: "star-outline", page: EmptyPage },
+        { name: "Status", icon: "account", page: EmptyPage },
+        { name: "Ability Scores", icon: "chart-box-outline", page: EmptyPage },
+        { name: "Weapons", icon: "sword-cross", page: EmptyPage },
+        { name: "Spells", icon: "book-open-variant", page: EmptyPage },
     ];
 
     // Create a tripled list of tabs for looping
