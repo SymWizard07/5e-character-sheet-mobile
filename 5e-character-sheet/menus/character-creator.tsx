@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import DataPicker from '../page_components/data-picker';
 
 interface CharacterCreatorProps {
     isVisible: boolean;
@@ -19,6 +20,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ isVisible, onClose,
     const [openClass, setOpenClass] = useState(false);
     const [openBackground, setOpenBackground] = useState(false);
 
+    const theme = colorScheme === 'dark' ? darkStyles : lightStyles;
     const pickerTheme = colorScheme === 'dark' ? 'DARK' : 'LIGHT';
 
     return (
@@ -34,47 +36,24 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ isVisible, onClose,
 
                     <View style={styles.row}>
                         <Text style={[styles.label, colorScheme === 'dark' ? darkStyles.label : lightStyles.label]}>Race</Text>
-                        <DropDownPicker
-                            open={openRace}
-                            value={selectedRace}
-                            items={[{ label: 'Human', value: 'human' }, { label: 'Elf', value: 'elf' }, { label: 'Dwarf', value: 'dwarf' }]}
-                            setOpen={setOpenRace}
-                            setValue={setSelectedRace}
-                            placeholder="Select Race"
+                        <DataPicker
+                            fileKey='races'
+                            jsonPath='race'
+                            propertyName='name'
+                            sourcePropName='source'
+                            colorScheme={colorScheme}
                             zIndex={4000}
                             zIndexInverse={1000}
-                            theme={pickerTheme}
-                            style={{
-                                borderColor: colorScheme === 'dark' ? '#888' : '#ccc',
-                                backgroundColor: colorScheme === 'dark' ? '#444' : '#fff',
-                            }}
-                            dropDownContainerStyle={{
-                                borderColor: colorScheme === 'dark' ? '#666' : '#ddd',
-                                backgroundColor: colorScheme === 'dark' ? '#333' : '#f9f9f9',
-                            }}
+                            placeholder='Select Race'
+                            value={selectedRace}
+                            setValue={setSelectedRace}
                         />
                     </View>
 
                     <View style={styles.row}>
                         <Text style={[styles.label, colorScheme === 'dark' ? darkStyles.label : lightStyles.label]}>Subrace</Text>
-                        <DropDownPicker
-                            open={openSubrace}
-                            value={selectedSubrace}
-                            items={[{ label: 'High Elf', value: 'high_elf' }, { label: 'Wood Elf', value: 'wood_elf' }, { label: 'Hill Dwarf', value: 'hill_dwarf' }]}
-                            setOpen={setOpenSubrace}
-                            setValue={setSelectedSubrace}
-                            placeholder="Select Subrace"
-                            zIndex={3000}
-                            zIndexInverse={2000}
-                            theme={pickerTheme}
-                            style={{
-                                borderColor: colorScheme === 'dark' ? '#888' : '#ccc',
-                                backgroundColor: colorScheme === 'dark' ? '#444' : '#fff',
-                            }}
-                            dropDownContainerStyle={{
-                                borderColor: colorScheme === 'dark' ? '#666' : '#ddd',
-                                backgroundColor: colorScheme === 'dark' ? '#333' : '#f9f9f9',
-                            }}
+                        <DataPicker
+                            fileKey='races'
                         />
                     </View>
 
@@ -90,14 +69,8 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ isVisible, onClose,
                             zIndex={2000}
                             zIndexInverse={3000}
                             theme={pickerTheme}
-                            style={{
-                                borderColor: colorScheme === 'dark' ? '#888' : '#ccc',
-                                backgroundColor: colorScheme === 'dark' ? '#444' : '#fff',
-                            }}
-                            dropDownContainerStyle={{
-                                borderColor: colorScheme === 'dark' ? '#666' : '#ddd',
-                                backgroundColor: colorScheme === 'dark' ? '#333' : '#f9f9f9',
-                            }}
+                            style={theme.dropDownPicker}
+                            dropDownContainerStyle={theme.dropDownContainer}
                         />
                     </View>
 
@@ -113,14 +86,8 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ isVisible, onClose,
                             zIndex={1000}
                             zIndexInverse={4000}
                             theme={pickerTheme}
-                            style={{
-                                borderColor: colorScheme === 'dark' ? '#888' : '#ccc',
-                                backgroundColor: colorScheme === 'dark' ? '#444' : '#fff',
-                            }}
-                            dropDownContainerStyle={{
-                                borderColor: colorScheme === 'dark' ? '#666' : '#ddd',
-                                backgroundColor: colorScheme === 'dark' ? '#333' : '#f9f9f9',
-                            }}
+                            style={theme.dropDownPicker}
+                            dropDownContainerStyle={theme.dropDownContainer}
                         />
                     </View>
 
@@ -140,6 +107,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     drawerContent: {
+        height: '80%',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         padding: 20,
@@ -160,7 +128,8 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     closeButton: {
-        marginTop: 20,
+        position: 'absolute',
+        bottom: 40,
         padding: 10,
         borderRadius: 8,
         alignSelf: 'center',
@@ -187,6 +156,14 @@ const lightStyles = StyleSheet.create({
     closeButtonText: {
         color: '#000',
     },
+    dropDownContainer: {
+        borderColor: '#444',
+        backgroundColor: '#fff',
+    },
+    dropDownPicker: {
+        borderColor: '#444',
+        backgroundColor: '#f9f9f9',
+    },
 });
 
 const darkStyles = StyleSheet.create({
@@ -204,6 +181,14 @@ const darkStyles = StyleSheet.create({
     },
     closeButtonText: {
         color: '#fff',
+    },
+    dropDownContainer: {
+        borderColor: '#666',
+        backgroundColor: '#333',
+    },
+    dropDownPicker: {
+        borderColor: '#888',
+        backgroundColor: '#444',
     },
 });
 
